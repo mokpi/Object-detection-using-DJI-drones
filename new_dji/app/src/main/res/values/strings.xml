@@ -1,0 +1,53 @@
+<resources>
+    <string name="app_name">Drone Navigator</string>
+    <string name="StartRecord">Start Record</string>
+    <string name="StopRecord">Stop Record</string>
+    <string name="ShootPhotoMode">Shoot Photo Mode</string>
+    <string name="RecordVideoMode">Record Video Mode</string>
+    <string name="NoProduct">Status: No Product Connected</string>
+    <string name="Open">Open</string>
+    <string name="DJIFPVDemo">DJIFPVDemo</string>
+    <string name="action_settings">Settings</string>
+    <string name="disconnected">Disconnected</string>
+    <string name="product_information">Product Information</string>
+    <string name="connection_loose">Status: No Product Connected</string>
+    <string name="sdk_version">DJI SDK Version: %1$s</string>
+    <string name="DroneNavigator">Drone Navigator</string>
+    <string name="exitapp">Exit</string>
+    <string name="terminate">EXIT</string>
+    <string name="Locate">Locate</string>
+    <string name="Add">Add</string>
+    <string name="Clear">Clear</string>
+    <string name="Config">Config</string>
+    <string name="Upload">Upload</string>
+    <string name="Start">Start</string>
+    <string name="Stop">Stop</string>
+    <string name="WaypointConfiguration">Waypoint Configuration</string>
+    <string name="Altitude">Altitude:</string>
+    <string name="Speed">Speed:</string>
+    <string name="Low">Low</string>
+    <string name="Mid">Mid</string>
+    <string name="High">High</string>
+    <string name="ActionAfteFinished">Action After Finished:</string>
+    <string name="UseWaypoint">Use Waypoint</string>
+    <string name="RCControl">RC Control</string>
+    <string name="Initial">Initial</string>
+    <string name="Auto">Auto</string>
+    <string name="Heading">Heading:</string>
+    <string name="BackTo1st">BackTo 1st</string>
+    <string name="AutoLand">AutoLand</string>
+    <string name="GoHome">GoHome</string>
+    <string name="None" translatable="false">None</string>
+    <string name="Capture">IMAGE</string>
+    <string name="gimbal">Gimbal degrees</string>
+    <string name="ip">Host Ip</string>
+    <string name="PC">PC Connection:Not Connected</string>
+    <string name="altitude_val">5</string>
+    <string name="ip_val">192.168.2.3</string>
+    <string name="pitch_val">-60</string>
+    <string name="pitch_hint">A value between -60 and 30 degrees</string>
+    <string name="alt_hint">The altitude of aircraft</string>
+    <string name="ip_hint">The ip of a host in the same network</string>
+    <string name="test">Status: Dji Aircraft Mavic pro</string>
+</resources>
+
