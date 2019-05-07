@@ -55,7 +55,9 @@ public class ConnectionActivity extends Activity implements View.OnClickListener
 
         initUI();
         // Register the broadcast receiver for receiving the device connection's changes.
-
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(RegnmoreApplication.FLAG_CONNECTION_CHANGE);
+        registerReceiver(mReceiver, filter);
 
     }
 
@@ -84,6 +86,8 @@ public class ConnectionActivity extends Activity implements View.OnClickListener
     protected void onDestroy() {
         Log.e(TAG, "onDestroy");
         super.onDestroy();
+        unregisterReceiver(mReceiver);
+
     }
 
     private void initUI() {
@@ -107,20 +111,20 @@ public class ConnectionActivity extends Activity implements View.OnClickListener
                     @Override
                     public void onProductDisconnect() {
                         showToast("Product Disconnected");
-                        mBtnOpen.setEnabled(false);
-                        mTextConnectionStatus.setText(R.string.connection_loose);
+                        //mBtnOpen.setEnabled(false);
+                       // mTextConnectionStatus.setText(R.string.connection_loose);
 
                     }
 
                     @Override
                     public void onProductConnect(BaseProduct baseProduct) {
                         showToast("Product Connected");
-                        mBtnOpen.setEnabled(true);
-                        String str = baseProduct instanceof Aircraft ? "DJIAircraft" : "DJIHandHeld";
-                        if (null != baseProduct.getModel()) {
-                            str=(baseProduct.getModel().getDisplayName());
-                        }
-                        mTextConnectionStatus.setText("Status: " + str + " connected");
+                        //mBtnOpen.setEnabled(true);
+                        //String str = baseProduct instanceof Aircraft ? "DJIAircraft" : "DJIHandHeld";
+                        //if (null != baseProduct.getModel()) {
+                         //   str=(baseProduct.getModel().getDisplayName());
+                        //}
+                        //mTextConnectionStatus.setText("Status: " + str + " connected");
 
                     }
 
@@ -141,9 +145,38 @@ public class ConnectionActivity extends Activity implements View.OnClickListener
             }
         });
     }
+    protected BroadcastReceiver mReceiver = new BroadcastReceiver() {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            refreshSDKRelativeUI();
+        }
+    };
+
+    private void refreshSDKRelativeUI() {
+        BaseProduct mProduct = RegnmoreApplication.getProductInstance();
+
+        if (null != mProduct && mProduct.isConnected()) {
+
+            Log.v(TAG, "refreshSDK: True");
+            mBtnOpen.setEnabled(true);
+
+            String str = mProduct instanceof Aircraft ? "DJIAircraft" : "DJIHandHeld";
+            if (null != mProduct.getModel()) {
+                   str=(mProduct.getModel().getDisplayName());
+                }
+            mTextConnectionStatus.setText("Status: " + str + " connected");
 
 
+        } else {
 
+            Log.v(TAG, "refreshSDK: False");
+            mBtnOpen.setEnabled(false);
+
+            //mTextProduct.setText(R.string.product_information);
+            mTextConnectionStatus.setText(R.string.connection_loose);
+        }
+    }
 
 
     @Override
