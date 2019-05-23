@@ -1,1 +1,1 @@
-n android app for object detection using DJI Mobile SDK. This app uses google maps to specify way-points that UAV will fly to. It takes pictures every 5 secs, and then send them to a PC to run YOLOv3 object detection algorithm.
+An android app for object detection using DJI Mobile SDK. This app uses google maps to specify way-points that UAV will fly to. It takes pictures every 5 secs, and then send them to a PC to run YOLOv3 object detection algorithm.
