@@ -549,7 +549,6 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                         Log.e(TAG, "mFinishedAction " + mFinishedAction);
                         Log.e(TAG, "mHeadingMode " + mHeadingMode);
 
-                        configWayPointMission();
                         if((pitch>-90) && (pitch<30)) {
                             Rotation.Builder builder=new Rotation.Builder().mode(RotationMode.ABSOLUTE_ANGLE).pitch(pitch).yaw(Rotation.NO_ROTATION).roll(Rotation.NO_ROTATION).time(0.5);
                             RegnmoreApplication.getProductInstance().getGimbal().rotate(builder.build(),MainActivity.this);
@@ -559,6 +558,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                             RegnmoreApplication.getProductInstance().getGimbal().rotate(builder.build(), MainActivity.this);
                             setResultToToast("Value must be between -90 and 30,default value is -60");
                         }
+                        configWayPointMission();
 
                     }
 
