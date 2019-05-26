@@ -218,7 +218,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     private void captureAction() {
         final dji.sdk.camera.Camera camera = RegnmoreApplication.getCameraInstance();
         if (camera != null) {
-            SettingsDefinitions.ShootPhotoMode photoMode = SettingsDefinitions.ShootPhotoMode.SINGLE; // Set the camera capture mode as Single mode
+            SettingsDefinitions.ShootPhotoMode photoMode = SettingsDefinitions.ShootPhotoMode.SINGLE;
             camera.setShootPhotoMode(photoMode, new CommonCallbacks.CompletionCallback() {
                 @Override
                 public void onResult(DJIError djiError) {
@@ -230,8 +230,6 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                                     @Override
                                     public void onResult(DJIError djiError) {
                                         if (djiError == null) {
-                                            //if all ok,print coordinates of place
-                                            //that photo taken
                                             double latitude = mFlightController.getState().getAircraftLocation().getLatitude();
                                             double longtitude = mFlightController.getState().getAircraftLocation().getLongitude();
                                             setResultToToast("Latitude:" + latitude + ",Longtitude:" + longtitude);
@@ -539,7 +537,6 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                         String altitudeString = wpAltitude_TV.getText().toString();
                         String pitchString = wppitch_TV.getText().toString();
                         ip = wpip_TV.getText().toString();
-
                         altitude = Integer.parseInt(nulltoIntegerDefalt(altitudeString));
                         pitch = Integer.parseInt(nulltoIntegerDefalt(pitchString));
                         Log.e(TAG, "altitude " + altitude);
@@ -554,9 +551,9 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                             RegnmoreApplication.getProductInstance().getGimbal().rotate(builder.build(),MainActivity.this);
                         }
                         else{
-                            Rotation.Builder builder = new Rotation.Builder().mode(RotationMode.ABSOLUTE_ANGLE).pitch(-60).yaw(Rotation.NO_ROTATION).roll(Rotation.NO_ROTATION).time(0.5);
+                            Rotation.Builder builder = new Rotation.Builder().mode(RotationMode.ABSOLUTE_ANGLE).pitch(-45).yaw(Rotation.NO_ROTATION).roll(Rotation.NO_ROTATION).time(0.5);
                             RegnmoreApplication.getProductInstance().getGimbal().rotate(builder.build(), MainActivity.this);
-                            setResultToToast("Value must be between -90 and 30,default value is -60");
+                            setResultToToast("Value must be between -90 and 30,default value is -45");
                         }
                         configWayPointMission();
 
@@ -666,9 +663,9 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             setUpMap();
         }
 
-        LatLng shenzhen = new LatLng(22.5362, 113.9454);
-        gMap.addMarker(new MarkerOptions().position(shenzhen).title("Marker in Shenzhen"));
-        gMap.moveCamera(CameraUpdateFactory.newLatLng(shenzhen));
+        LatLng ntua = new LatLng(37.979186, 23.7831103);
+        gMap.addMarker(new MarkerOptions().position(ntua).title("Marker in NTUA"));
+        gMap.moveCamera(CameraUpdateFactory.newLatLng(ntua));
     }
 
 
@@ -687,6 +684,15 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             }
 
             @Override
+            public void onSuccess(String filePath) {
+                if(!ip.isEmpty()) {
+                    File ToSend = new File(filePath + "/" + mediaFile.getFileName());
+                    new FileSender(ToSend, ip).execute("");
+                }
+
+            }
+
+            @Override
             public void onProgress(long total, long current) {
             }
 
@@ -700,16 +706,6 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
             }
 
-            @Override
-            public void onSuccess(String filePath) {
-                // setResultToToast("Download File Success" + ":" + filePath);
-                //if filePath is only the location -> filePath +
-                    File ToSend = new File(filePath+"/"+mediaFile.getFileName() );
-                    //setResultToToast("File to send:" + ToSend);
-                    new FileSender(ToSend, ip).execute("");
-
-
-            }
         });
     }
 
