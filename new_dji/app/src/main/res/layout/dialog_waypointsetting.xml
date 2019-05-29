@@ -58,7 +58,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/pitch_hint"
             android:inputType="numberSigned"
-            android:text="@string/pitch_val"></EditText>
+            android:text="@string/gimbal2"></EditText>
     </LinearLayout>
 
     <LinearLayout
@@ -80,8 +80,7 @@
             android:layout_width="595dp"
             android:layout_height="wrap_content"
             android:hint="@string/ip_hint"
-            android:inputType="text"
-            android:text="@string/ip_val"></EditText>
+            android:inputType="textUri"></EditText>
     </LinearLayout>
 
     <LinearLayout
