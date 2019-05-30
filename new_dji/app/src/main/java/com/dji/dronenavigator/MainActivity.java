@@ -113,6 +113,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     public static WaypointMission.Builder waypointMissionBuilder;
     private FlightController mFlightController;
     private WaypointMissionOperator instance;
+    private boolean capture_enabled;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -147,7 +148,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             public void run() {
                 if ((getWaypointMissionOperator().getCurrentState() == WaypointMissionState.EXECUTING)) {
                     if (mFlightController.getState().getAircraftLocation().getAltitude() > altitude - 1) {
-                        captureAction();
+                        if(capture_enabled)
+                            captureAction();
                     }
                 }
             }
@@ -480,6 +482,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         RadioGroup speed_RG = (RadioGroup) wayPointSettings.findViewById(R.id.speed);
         RadioGroup actionAfterFinished_RG = (RadioGroup) wayPointSettings.findViewById(R.id.actionAfterFinished);
         RadioGroup heading_RG = (RadioGroup) wayPointSettings.findViewById(R.id.heading);
+        RadioGroup capture_en = (RadioGroup) wayPointSettings.findViewById(R.id.photo_capture);
 
         speed_RG.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
 
@@ -495,6 +498,18 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             }
 
         });
+
+        capture_en.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (checkedId == R.id.enabled) {
+                    capture_enabled = true;
+                } else if (checkedId == R.id.disabled) {
+                    capture_enabled = false;
+                }
+            }
+        });
+
         actionAfterFinished_RG.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -662,6 +677,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             gMap = googleMap;
             setUpMap();
         }
+        
 
         LatLng ntua = new LatLng(37.979186, 23.7831103);
         gMap.addMarker(new MarkerOptions().position(ntua).title("Marker in NTUA"));
