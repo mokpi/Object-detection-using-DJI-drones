@@ -49,5 +49,9 @@
     <string name="alt_hint">The altitude of aircraft</string>
     <string name="ip_hint">The ip of a host in the same network</string>
     <string name="test">Status: Dji Aircraft Mavic pro</string>
+    <string name="gimbal2">-45</string>
+    <string name="Auto_capt">Auto photo capture enable</string>
+    <string name="enabled">Enable</string>
+    <string name="disabled">Disable</string>
 </resources>
 
