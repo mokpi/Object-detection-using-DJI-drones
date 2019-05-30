@@ -53,5 +53,6 @@
     <string name="Auto_capt">Auto photo capture enable</string>
     <string name="enabled">Enable</string>
     <string name="disabled">Disable</string>
+    <string name="auto">Auto photo capture:</string>
 </resources>
 
